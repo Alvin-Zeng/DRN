@@ -1,0 +1,68 @@
+# ======================================= dataset configs ==================================
+Charades:
+  MFnet:
+    feature_root: /home/datasets/Charades/Charades_MFnet_32unit_stride8_merged/
+    feature_dim: 768
+    ft_window_size: 32
+    ft_overlap: 0.75
+  C3D:
+    feature_root: /home/datasets/Charades/C3D_unit16_overlap0.5_merged/
+    feature_dim: 4096
+    ft_window_size: 16
+    ft_overlap: 0.5
+  I3D:
+    feature_root: /home/datasets/Charades/I3d_resnet50_unit64_overlap0.875_merged/
+    feature_dim: 2048
+    ft_window_size: 64
+    ft_overlap: 0.875
+
+# ======================================= Learning configs ==================================
+  dataset: Charades
+  feature_type: MFnet
+  props_file_path: ./data/dataset/Charades/Charades_MAN_32_props.txt
+  glove_weights: ./data/glove_weights
+  n_epoch: 50
+  batch_size: 32
+  test_batch_size: 16
+  lr: 0.001
+  loss_weights: 0.5
+  clip_gradient: 0.5
+  loss_type: iou
+  lstm_layers: 1
+  hidden_dim: 512
+  embedding: 300
+  node_ft_dim: 1024
+  graph_num_layers: 3
+  nodeUpdate_dropout: 0.0
+  edgeUpdate_dropout: 0.0
+  start_epoch: 0
+  weight_decay: 5e-4
+  pos_thr: 0.5
+  neg_thr: 0.1
+
+  # ======================================= Backbone configs ==================================
+  first_output_dim: 256
+  # ======================================= FPN configs ==================================
+  fpn_feature_dim: 512
+  fpn_stride: [1, 2, 4]
+  # ======================================= FCOS configs ==================================
+  fcos_conv_layers: 1
+  fcos_prior_prob: 0.01
+  fcos_loss_alpha: 0.25
+  fcos_loss_gamma: 2.0
+  fcos_inference_thr: 0.05
+  fcos_pre_nms_top_n: 32
+  fcos_nms_thr: 0.6
+  fcos_num_class: 2
+  test_detections_per_img: 32
+
+
+
+
+
+  # ======================================= Print and snapshot configs ==================================
+  snapshot_pref: ./exp/debug/123
+  print_freq: 50
+  eval_freq: 1
+
+

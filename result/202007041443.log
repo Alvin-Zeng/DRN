@@ -1,0 +1,77 @@
+2020-07-04 14:43:35,398 INFO 
+creating folder: ./result/
+2020-07-04 14:43:35,399 INFO 
+runtime args
+
+{
+    "dataset": "Charades",
+    "props_file_path": "./data/dataset/Charades/Charades_MAN_32_props.txt",
+    "feature_type": "C3D",
+    "n_epoch": 50,
+    "batch_size": 32,
+    "is_first_stage": false,
+    "is_second_stage": false,
+    "is_third_stage": false,
+    "test_batch_size": 16,
+    "lr": 0.001,
+    "gpu": "7",
+    "snapshot_pref": "./result/",
+    "glove_weights": "./data/glove_weights",
+    "hidden_dim": 512,
+    "embedding": 300,
+    "lstm_layers": 1,
+    "node_ft_dim": 1024,
+    "graph_num_layers": 3,
+    "resume": "/home/datasets/xuhaoming_exps_checkpoints/Charades_IoU/C3D_iou_baseline1_bls-box-Cat_first_stage_kern1/model_Charades_epoch3_top1_44.704_top5_87.903_model_best.pth.tar",
+    "evaluate": true,
+    "clip_gradient": 0.5,
+    "loss_weights": 0.5,
+    "loss_type": "iou",
+    "start_epoch": 0,
+    "weight_decay": 0.0005,
+    "print_freq": 50,
+    "save_freq": null,
+    "eval_freq": 1,
+    "MFnet": {
+        "feature_root": "/home/datasets/Charades/Charades_MFnet_32unit_stride8_merged/",
+        "feature_dim": 768,
+        "ft_window_size": 32,
+        "ft_overlap": 0.75
+    },
+    "C3D": {
+        "feature_root": "/home/datasets/Charades/C3D_unit16_overlap0.5_merged/",
+        "feature_dim": 4096,
+        "ft_window_size": 16,
+        "ft_overlap": 0.5
+    },
+    "I3D": {
+        "feature_root": "/home/datasets/Charades/I3d_resnet50_unit64_overlap0.875_merged/",
+        "feature_dim": 2048,
+        "ft_window_size": 64,
+        "ft_overlap": 0.875
+    },
+    "nodeUpdate_dropout": 0.0,
+    "edgeUpdate_dropout": 0.0,
+    "pos_thr": 0.5,
+    "neg_thr": 0.1,
+    "first_output_dim": 256,
+    "fpn_feature_dim": 512,
+    "fpn_stride": [
+        1,
+        2,
+        4
+    ],
+    "fcos_conv_layers": 1,
+    "fcos_prior_prob": 0.01,
+    "fcos_loss_alpha": 0.25,
+    "fcos_loss_gamma": 2.0,
+    "fcos_inference_thr": 0.05,
+    "fcos_pre_nms_top_n": 32,
+    "fcos_nms_thr": 0.6,
+    "fcos_num_class": 2,
+    "test_detections_per_img": 32
+}
+
+2020-07-04 14:43:41,156 INFO Loading glove weights
+2020-07-04 14:43:52,112 INFO => loading checkpoint '/home/datasets/xuhaoming_exps_checkpoints/Charades_IoU/C3D_iou_baseline1_bls-box-Cat_first_stage_kern1/model_Charades_epoch3_top1_44.704_top5_87.903_model_best.pth.tar'
+2020-07-04 14:43:53,762 INFO => loaded checkpoint 'True' (epoch 4)

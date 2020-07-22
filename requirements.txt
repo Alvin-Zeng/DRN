@@ -1,0 +1,7 @@
+pyyaml
+ruamel.yaml
+matplotlib
+nltk
+tensorflow
+tensorboardX
+plotly

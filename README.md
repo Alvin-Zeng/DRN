@@ -1,38 +1,181 @@
-## Dense Regression Network for Video Grounding
+# Dense Regression Network for Video Grounding
 
-This repo holds the codes and models for DRN presented on CVPR 2020
+This repo holds the codes and models for the DRN framework presented on CVPR 2020
 
 **Dense Regression Network for Video Grounding**
-Runhao Zeng, Haoming Xu, Wenbing Huang, Peihao Chen, Mingkui Tan, Chuang Gan,  *CVPR2020*, Seattle, Washington.
+Runhao Zeng, Haoming Xu, Wenbing Huang, Peihao Chen, Mingkui Tan, Chuang Gan, *CVPR 2020*, Seattle, Washington.
 
-[[Paper]](https://arxiv.org/abs/2004.03545)
+[[Paper](https://arxiv.org/abs/2004.03545)]
 
-In this work, we address the problem of video grounding from natural language queries. 
-The key challenge in this task is that one training video might only contain a few annotated starting/ending frames that can be used as positive examples for model training. 
-Most conventional approaches directly train a binary classifier using such imbalance data, thus achieving inferior results. 
-The key idea of this paper is to use the distances between the frame within the ground truth and the starting (ending) frame as dense supervisions to improve the video grounding accuracy. 
-Specifically, we design a novel dense regression network (DRN) to regress the distances from each frame to the starting (ending) frame of the video segment described by the query. 
-Experimental results show that our approach significantly outperforms state-of-the-arts on three datasets (i.e., Charades-STA, ActivityNet-Captions, and TACoS).
+[//]: ------------------------------Separator------------------------------
 
-## Network architecture
-![avatar](DRN.png)
+# Contents
 
-## Resources
-We are still working on it and will release the source code soon.
+---
+- [Usage Guide](#usage-guide)
+    - [Module Preparation](#module-preparation)
+    - [Code Preparation](#code-preparation)
+    - [Training DRN](#training-drn)
+        - [First Stage](#first-stage)
+        - [Second Stage](#second-stage)
+        - [Third Stage](#third-stage)
+    - [Testing DRN](#testing-drn)
+- [Other Info](#other-info)
+    - [Citation](#citation)
+    - [Contact](#contact)
+---
 
-## Reference
-If you find our work useful, please use the following bibtex to cite our work:
+[//]: ------------------------------Separator------------------------------
+
+# Usage Guide
+
+## Code and Data Preparation
+
+[[back to top](#dense-regression-network-for-video-grounding)]
+
+### Get the code
+
+Clone this repo with git
+
+```bash
+git clone https://github.com/Alvin-Zeng/DRN
+cd DRN
 ```
-@InProceedings{zeng2020dense,
-author = {Zeng, Runhao and Xu, Haoming and Huang, Wenbing and Chen, Peihao and Tan, Mingkui and Gan, Chuang},
-title = {Dense Regression Network for Video Grounding},
-booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-month = {June},
-year = {2020}
+
+### Download Features
+
+Here, we provide the C3D features on Charades-STA for training and testing.
+
+Charades-STA: You can download it from [Baidu Cloud][features_baidu] (password: smil).
+
+## Module Preparation
+
+[[back to top](#dense-regression-network-for-video-grounding)]
+
+
+Start from a clear conda env
+
+```bash
+conda create -n DRN
+conda activate DRN
+```
+
+This repo is based on FCOS, use the following command to install it
+
+```bash
+bash setup.sh
+```
+
+Other minor Python modules can be installed by running
+
+```bash
+pip install -r requirements.txt
+```
+
+
+## Training DRN
+
+[[back to top](#dense-regression-network-for-video-grounding)]
+
+Plesse first set the path of features in data/default_config.yaml
+
+```bash
+feature_root: $PATH_OF_FEATURES
+```
+### First Stage
+
+Use the following command to train the first stage of DRN
+
+```bash
+bash drn_train.sh $PATH_TO_SAVE_FIRST_MODEL is_first_stage
+```
+
+- `$PATH_TO_SAVE_FIRST_MODEL` denotes the path to save the first-stage model
+
+
+### Second Stage
+
+Use the following command to train the second stage of DRN
+
+```bash
+bash drn_train.sh $PATH_TO_SAVE_SECOND_MODEL is_second_stage $FIRST_CHECKPOINT 
+```
+
+- `$PATH_TO_SAVE_SECOND_MODEL` denotes the path to save the second-stage model
+
+- `$FIRST_CHECKPOINT` denotes the trained model from the first stage
+
+
+### Third Stage
+
+Use the following command to train the third stage of DRN
+
+```bash
+bash drn_train.sh $PATH_TO_SAVE_THIRD_MODEL is_third_stage $SECOND_CHECKPOINT
+```
+
+- `$PATH_TO_SAVE_THIRD_MODEL` denotes the path to save the third-stage model
+
+- `$SECOND_CHECKPOINT` denotes the trained model from the second stage
+
+
+## Testing DRN
+
+[[back to top](#dense-regression-network-for-video-grounding)]
+
+Here, we provide the models trained on Charades-STA for testing.
+
+Charades-STA: You can download them from [Baidu Cloud][modelss_baidu] (password: smil).
+
+
+Use the following command to test the trained model
+
+```bash
+bash drn_test.sh $TRAINED_CHECKPOINT
+```
+
+- `$TRAINED_CHECKPOINT` denotes the trained model
+
+The evaluation results will be put in the "results" folder
+
+### THUMOS14
+
+| Method        | R@1 IoU=0.5 (%) | R@5 IoU=0.5 (%) |
+|:-------------:|:---------------:|:---------------:|
+| DRN (C3D)     |      45.40      |      89.06      |
+
+[//]: ------------------------------Separator------------------------------
+
+# Other Info
+
+[[back to top](#dense-regression-network-for-video-grounding)]
+
+## Citation
+
+Please cite the following paper if you feel DRN useful to your research
+
+```
+@inproceedings{DRN2020CVPR,
+  author    = {Runhao Zeng and
+               Haoming Xu and
+               Wenbing Huang and
+               Peihao Chen and
+               Mingkui Tan and
+               Chuang Gan},
+  title     = {Dense Regression Network for Video Grounding},
+  booktitle = {CVPR},
+  year      = {2020},
 }
 ```
+
+
 ## Contact
+
 For any question, please file an issue or contact
+
 ```
 Runhao Zeng: runhaozeng.cs@gmail.com
 ```
+
+[features_baidu]: https://pan.baidu.com/s/1Sn0GYpJmiHa27m9CAN12qw
+[models_baidu]: https://pan.baidu.com/s/1EQNi5cLEDptVed91YpHVwg
