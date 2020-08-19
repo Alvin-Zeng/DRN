@@ -138,7 +138,7 @@ bash drn_test.sh $TRAINED_CHECKPOINT
 
 The evaluation results will be put in the "results" folder
 
-### THUMOS14
+### Charades-STA
 
 | Method        | R@1 IoU=0.5 (%) | R@5 IoU=0.5 (%) |
 |:-------------:|:---------------:|:---------------:|
