@@ -125,7 +125,7 @@ bash drn_train.sh $PATH_TO_SAVE_THIRD_MODEL is_third_stage $SECOND_CHECKPOINT
 
 Here, we provide the models trained on Charades-STA for testing.
 
-Charades-STA: You can download them from [Baidu Cloud][modelss_baidu] (password: smil).
+Charades-STA: You can download them from [Baidu Cloud][models_baidu] (password: smil).
 
 
 Use the following command to test the trained model
